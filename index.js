@@ -1,42 +1,100 @@
-let movieArray = [];
-let selectedGenre = "not selected";
+let shiftArray = [];
+let selectedType = "not selected";
+  
 
-// define a constructor to create player objects
-var MovieObject = function (pTitle, pYear, pGenre, pMan, pWoman) {
-  this.Title = pTitle;
-  this.Year = pYear;
-  this.ID = movieArray.length + 1;
-  this.Genre = pGenre;  // action  comedy  drama  horrow scifi  musical  western
-  this.Man = pMan;
-  this.Woman = pWoman;
+function showDiv() {
+    document.getElementById('hello').style.display = "block";
+ 
+  }
+  
+  function showValue() {
+    var name = document.getElementById('name').value;
+    document.getElementById('ans').innerHTML = "Welcome back, " + name + "!";
+    document.getElementById('hello').style.display = "none";
+  }
+
+  function showTime(){
+    var date = new Date();
+    var h = date.getHours(); // 0 - 23
+    var m = date.getMinutes(); // 0 - 59
+    var s = date.getSeconds(); // 0 - 59
+    var session = "AM";
+    
+    if(h == 0){
+        h = 12;
+    }
+    
+    if(h > 12){
+        h = h - 12;
+        session = "PM";
+    }
+    
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+    
+    var time = h + ":" + m + ":" + s + " " + session;
+    document.getElementById("MyClockDisplay").innerText = time;
+    document.getElementById("MyClockDisplay").textContent = time;
+    
+    setTimeout(showTime, 1000);
+    
 }
 
-movieArray.push(new MovieObject("Moonstruck", 1981, "Drama", "Nicholas Cage", "Cher"));
-movieArray.push(new MovieObject("Wild At Heart", 1982, "Drama", "Nicholas Cage", "Laura VanDern"));
-movieArray.push(new MovieObject("Raising Arizona", 1983, "Comedy", "Nicholas Cage", "Holly Hunter"));
+// //today's date
+// var curday = function(sp){
+//   today = new Date();
+//   var dd = today.getDate();
+//   var mm = today.getMonth()+1; //As January is 0.
+//   var yyyy = today.getFullYear();
+  
+//   if(dd<10) dd='0'+dd;
+//   if(mm<10) mm='0'+mm;
+//   return (mm+sp+dd+sp+yyyy);
+//   };
+//   console.log(curday('/'));
+//   document.getElementById("demo").innerHTML = curday;
+
+
+
+// define a constructor to create player objects
+var shiftObject = function (pDay, pYear, pType, pMonth, pHours) {
+  this.Day = pDay;
+  this.Year = pYear;
+  this.ID = shiftArray.length + 1;
+  this.Type = pType;  // action  comedy  drama  horrow scifi  musical  western
+  this.Month = pMonth;
+  this.Hours = pHours;
+}
+
+shiftArray.push(new shiftObject("24", 2020, "DoubleShift", "04", "5.5"));
+shiftArray.push(new shiftObject("22", 2020, "BasicShift", "04", "4.5"));
+shiftArray.push(new shiftObject("23", 2020, "DoubleShift", "04", "2.5"));
+
 
 document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("buttonAdd").addEventListener("click", function () {
-    movieArray.push(new MovieObject(document.getElementById("title").value, document.getElementById("year").value,
-      selectedGenre, document.getElementById("man").value, document.getElementById("woman").value));
+    shiftArray.push(new shiftObject(document.getElementById("day").value, document.getElementById("year").value,
+      selectedType, document.getElementById("month").value, document.getElementById("hours").value));
 });
 
-  $(document).bind("change", "#select-genre", function (event, ui) {
-    selectedGenre = $('#select-genre').val();
+  $(document).bind("change", "#select-type", function (event, ui) {
+    selectedType = $('#select-type').val();
   });
 
-  document.getElementById("buttonSortTitle").addEventListener("click", function () {
-    movieArray.sort(dynamicSort("Title"));
+  document.getElementById("buttonSortHours").addEventListener("click", function () {
+    shiftArray.sort(dynamicSort("Hours"));
     createList();
     document.location.href = "index.html#ListAll";
   });
 
-  document.getElementById("buttonSortGenre").addEventListener("click", function () {
-    movieArray.sort(dynamicSort("Genre"));
+  document.getElementById("buttonSortType").addEventListener("click", function () {
+    shiftArray.sort(dynamicSort("Type"));
     createList();
     document.location.href = "index.html#ListAll";
   });
+
 
 $(document).on("pagebeforeshow", "#ListAll", function (event) {   // have to use jQuery 
  // document.getElementById("IDparmHere").innerHTML = "";
@@ -44,26 +102,26 @@ $(document).on("pagebeforeshow", "#ListAll", function (event) {   // have to use
 });
   
   document.getElementById("buttonClear").addEventListener("click", function () {
-    document.getElementById("title").value = "";
+    document.getElementById("day").value = "";
     document.getElementById("year").value = "";
-    document.getElementById("man").value = "";
-    document.getElementById("woman").value = "";
+    document.getElementById("month").value = "";
+    document.getElementById("hours").value = "";
   });
   
 $(document).on("pagebeforeshow", "#Load", function (event) {   // have to use jQuery 
-  document.getElementById("title").value = "";
+  document.getElementById("day").value = "";
   document.getElementById("year").value = "";
-  document.getElementById("man").value = "";
-  document.getElementById("woman").value = "";
+  document.getElementById("month").value = "";
+  document.getElementById("hours").value = "";
   });
 
 $(document).on("pagebeforeshow", "#page3", function (event) {   // have to use jQuery 
   let localID =  document.getElementById("IDparmHere").innerHTML;
-  document.getElementById("oneTitle").innerHTML = "The title is: " + movieArray[localID-1].Title;
-  document.getElementById("oneYear").innerHTML = "Year released " + movieArray[localID - 1].Year;
-  document.getElementById("oneGenre").innerHTML = "Genre " + movieArray[localID - 1].Genre;
-  document.getElementById("oneWoman").innerHTML = "Leading Woman " + movieArray[localID - 1].Woman;
-  document.getElementById("oneMan").innerHTML = "Leading Man " + movieArray[localID - 1].Man;
+  document.getElementById("oneDay").innerHTML = "Day " + shiftArray[localID-1].Day;
+  document.getElementById("oneYear").innerHTML = "Year " + shiftArray[localID - 1].Year;
+  document.getElementById("oneType").innerHTML = "Shift Type " + shiftArray[localID - 1].Type;
+  document.getElementById("oneHours").innerHTML = "Hours Total " + shiftArray[localID - 1].Hours;
+  document.getElementById("oneMonth").innerHTML = "Month " + shiftArray[localID - 1].Month;
  });
 
 });
@@ -77,10 +135,10 @@ function createList()
   };
 
   var ul = document.createElement('ul');  
-  console.log(movieArray);
-  movieArray.forEach(function (element,) {   // use handy array forEach method
+  console.log(shiftArray);
+  shiftArray.forEach(function (element,) {   // use handy array forEach method
     var li = document.createElement('li');
-    li.innerHTML = "<a data-transition='pop' class='oneMovie' data-parm=" + element.ID + "  href='#page3'>Get Details </a> " + element.ID + ":  " + element.Title + "  " + element.Genre;
+    li.innerHTML = "<a data-transition='pop' class='oneMovie' data-parm=" + element.ID + "  href='#page3' >Details  </a> " + element.ID + ":  " + element.Month + "/" + element.Day + " | " + element.Type + "  " + element.Hours + "hrs";
     ul.appendChild(li);
   });
   divMovieList.appendChild(ul)
@@ -98,6 +156,7 @@ function createList()
    
 };
   
+
 
 /**
  *  https://ourcodeworld.com/articles/read/764/how-to-sort-alphabetically-an-array-of-objects-by-key-in-javascript

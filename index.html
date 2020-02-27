@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dice Game</title>
+    <title>Your Company Time and Leave Report</title>
     <!-- <documentation at http://demos.jquerymobile.com/1.4.1/ > -->
   
     <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
@@ -22,25 +22,44 @@
                <!-- helpful location   -->
               <!-- https://demos.jquerymobile.com/1.2.0/docs/toolbars/docs-navbar.html -->
 
-                <h1>My Movies</h1>
+                <h1>Welcome to your TLR</h1>
                 <div data-role="navbar"  data-theme='b'>
                     <ul>
-                        <li><a href="#home">Home Page</a></li>
-                        <li><a href="#Load">Add Movie</a></li>
-                        <li><a href="#ListAll">List Movies</a></li>
-         
+                      <li><a href="#home" data-icon="home">Home Page</a></li>
+                      <li><a href="#Load" data-icon="plus">Add New Shift</a></li>
+                      <li><a href="#ListAll" data-icon="calendar">List Your Shifts</a></li>
                     </ul>
                   </div><!-- /navbar -->
                
             </div>
             <!--   page content -->
             <div data-role="content" data-theme='b'>
-               <h2> My Collection of Movies</h2>
-            </div>
+             
               
+               <input type="button" onclick="showDiv()" data-icon="edit" value="Click to Add Your Name" />
+               <form id="hello" style="display:none;">
+                 <label>Enter Name: </label><br>
+                 <input type="text" id="name" required>
+                 <button type="button" onclick="showValue()">Submit</button>
+               </form>
+               
+               <div id="ans"></div>
+               
+               <p>The Time and Leave Reporting (TLR) application is available to all employees. 
+                 TLR streamlines the process of reporting time. The TLR allows employees to report amount of hours 
+                 they worked and review past timesheets.</p>
+                 <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+              </div>
+
+
+
+              <button type="button" onclick="showTime()" data-icon="clock">Display Time</button>
+
+
+
             <!--  page footer -->
             <div data-role="footer" data-theme='b'>
-                    <h1>Copyrigtht 2020 by Kurt Friedrich</h1>
+                    <h1>Copyright | Yaroslav Kidik</h1>
             </div>
         </div>
 
@@ -48,48 +67,121 @@
         <div data-role="page"  id="Load">
             <!--  page header -->
             <div data-role="header" data-theme='a'>
-              <h1>My Movies</h1>
+              <h1>Welcome to your TLR</h1>
               <div data-role="navbar"  data-theme='b'>
                   <ul>
-                      <li><a href="#home">Home Page</a></li>
-                      <li><a href="#Load">Add Movie</a></li>
-                      <li><a href="#ListAll">List Movies</a></li>
-                   </ul>
+                    <li><a href="#home" data-icon="home">Home Page</a></li>
+                    <li><a href="#Load" data-icon="plus">Add New Shift</a></li>
+                    <li><a href="#ListAll" data-icon="calendar">List Your Shifts</a></li>
+               </ul>
                 </div><!-- /navbar -->
           </div>
             <!-- page content -->
             <div data-role="content" data-theme='c'>
-              <h2>Enter a new Movie</h2>
-                Enter movie name <br />
-                <input type="text" value="" id="title" />
-                Enter year released <br />
-                <input type="text" value="" id="year" />
-                Enter leading man <br />
-                <input type="text" value="" id="man" />
-                Enter leading woman <br />
-                <input type="text" value="" id="woman" />
+              <h2>Add New Shift</h2>
+
+                <div data-role="fieldcontain">
+                  <fieldset data-role="controlgroup">
+                      <legend>Shift Date:</legend>
+                  
+                      <label for="select-choice-month">Month</label>
+                      <select name="select-choice-month" id="month">
+                          <option>Month</option>
+                          <option value="01">January</option>
+                          <option value="02">February</option>
+                          <option value="03">March</option>
+                          <option value="04">April</option>
+                          <option value="05">May</option>
+                          <option value="06">June</option>
+                          <option value="07">July</option>
+                          <option value="08">August</option>
+                          <option value="09">September</option>
+                          <option value="10">October</option>
+                          <option value="11">November</option>
+                          <option value="12">December</option>
+                      </select>
+                  
+                      <label for="select-choice-day">Day</label>
+                      <select name="select-choice-day" id="day">
+                          <option>Day</option>
+                          <option value="01">1</option>
+                          <option value="02">2</option>
+                          <option value="03">3</option>
+                          <option value="04">4</option>
+                          <option value="05">5</option>
+                          <option value="06">6</option>
+                          <option value="07">7</option>
+                          <option value="08">8</option>
+                          <option value="09">9</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                          <option value="13">13</option>
+                          <option value="14">14</option>
+                          <option value="15">15</option>
+                          <option value="16">16</option>
+                          <option value="17">17</option>
+                          <option value="18">18</option>
+                          <option value="19">19</option>
+                          <option value="20">20</option>
+                          <option value="21">21</option>
+                          <option value="22">22</option>
+                          <option value="23">23</option>
+                          <option value="24">24</option>
+                          <option value="25">25</option>
+                          <option value="26">26</option>
+                          <option value="27">27</option>
+                          <option value="28">28</option>
+                          <option value="29">29</option>
+                          <option value="30">30</option>
+                          <option value="31">31</option>
+                      </select>
+                  
+                      <label for="select-choice-year">Year</label>
+                      <select name="select-choice-year" id="year">
+                          <option>Year</option>
+                          <option value="2018">2018</option>
+                          <option value="2019">2019</option>
+                          <option value="2020">2020</option>
+                          <!-- etc. -->
+                      </select>
+                      
+                  </fieldset>
+              </div>
+               
+                Enter Hours <br />
+                <input type="text" value="" id="hours" />
+
                 <form>
                   <div class="ui-field-contain">
-                    <label for="select-genre">Select a Genre</label>
-                    <select name="select-genre" id="select-genre">
-                      <option value="Action">Action</option>
-                      <option value="Comedy">Comedy</option>
-                      <option value="Drama">Drama</option>
-                      <option value="Horror">Horror</option>
-                      <option value="SciFi">SciFi</option>
-                      <option value="Musical">Musical</option>
-                      <option value="Western">Western</option>
+                    <label for="select-type">Select a Type</label>
+                    <select name="select-type" id="select-type">
+                      
+                      <option value="BasicShift">Basic Shift</option>
+                      <option value="HolidayShift">Holiday Shift</option>
+                      <option value="DoubleShift">Double Shift</option>
+                      <option value="SickLeave">Sick Leave</option>
+
                     </select>
                   </div>
                 </form>
 
-                <input type="button" value="Click To Add Movie" id="buttonAdd"  data-inline="true" />
-                  <input type="button" value="Clear Data" id="buttonClear"  data-inline="true" />
+
+                <div data-role="fieldcontain" class="ui-hide-label">
+                  <fieldset data-role="controlgroup">
+                   <legend>Agree that above information is correct</legend>
+                   <input type="checkbox" name="checkbox-agree" id="checkbox-agree" class="custom" />
+                   <label for="checkbox-agree">I agree that information provided by me is correct</label>
+                  </fieldset>
+              </div>
+
+                <input type="button" value="Click To Add Shift" id="buttonAdd" data-icon="plus" data-inline="true" />
+                  <input type="button" value="Clear Data" id="buttonClear" data-icon="minus" data-inline="true" />
             </div>
               
             <!--   page footer -->
             <div data-role="footer" data-theme='b'>
-              <h1>Copyrigtht 2020 by Kurt Friedrich</h1>
+              <h1>Copyright | Yaroslav Kidik</h1>
             </div>
         </div>
 
@@ -99,26 +191,26 @@
     <div data-role="page"  id="ListAll">
             <!--   page header -->
             <div data-role="header" data-theme='a'>
-                <h1>My Movies</h1>
+                <h1>Welcome to your TLR</h1>
               <div data-role="navbar"  data-theme='b'>
                   <ul>
-                    <li><a href="#home">Home Page</a></li>
-                    <li><a href="#Load">Add Movie</a></li>
-                    <li><a href="#ListAll">List Movies</a></li>
-                  </ul>
+                    <li><a href="#home" data-icon="home">Home Page</a></li>
+                    <li><a href="#Load" data-icon="plus">Add New Shift</a></li>
+                    <li><a href="#ListAll" data-icon="calendar">List Your Shifts</a></li>
+              </ul>
                 </div><!-- /navbar -->
           </div>
             <!--   page content -->
             <div data-role="content" data-theme='e'>
-              <p> Here are my Movies</p>
+              <h3> My Current Shifts</h3>
               <div id="divMovieList"></div>
             </div>
-            <input type="button" value="Sort By Title" id="buttonSortGenre" data-inline="true"  />
-            <input type="button" value="Sort By Genre" id="buttonSortTitle" data-inline="true"   />
+            <input type="button" value="Sort By Type" id="buttonSortType" data-icon="bars" data-inline="true"  />
+            <input type="button" value="Sort By Hours" id="buttonSortHours" data-icon="bullets" data-inline="true"   />
               
             <!--   page footer -->
             <div data-role="footer" data-theme='b'>
-              <h1>Copyrigtht 2020 by Kurt Friedrich</h1>
+              <h1>Copyright | Yaroslav Kidik</h1>
             </div>
         </div>
     </div>
@@ -127,12 +219,12 @@
     <div data-role="page"  id="page3">
             <!--   page header -->
             <div data-role="header" data-theme='a'>
-                <h1>My Movies</h1>
+                <h1>Welcome to your TLR</h1>
               <div data-role="navbar"  data-theme='b'>
                   <ul>
-                      <li><a href="#home">Home Page</a></li>
-                      <li><a href="#Load">Add Movie</a></li>
-                      <li><a href="#ListAll">List Movies</a></li>
+                    <li><a href="#home" data-icon="home">Home Page</a></li>
+                    <li><a href="#Load" data-icon="plus">Add New Shift</a></li>
+                    <li><a href="#ListAll" data-icon="calendar">List Your Shifts</a></li>
 
                   </ul>
                 </div><!-- /navbar -->
@@ -141,18 +233,18 @@
             <div data-role="content" data-theme='c'>
                 <p> Here are the details</p>
                 <p id="IDparmHere" hidden>change1</p>  <!-- hidden    a place to stash the user ID -->
-               <p id="oneTitle"></p>
+               <p id="oneDay"></p>
                <p id="oneYear"></p>
-                <p id="oneGenre"></p>
-                <p id="oneWoman"></p>
-                <p id="oneMan"></p>
+                <p id="oneType"></p>
+                <p id="oneHours"></p>
+                <p id="oneMonth"></p>
                 
               
             </div>
               
             <!--    footer -->
             <div data-role="footer" data-theme='b'>
-              <h1>Copyrigtht 2020 by Kurt Friedrich</h1>
+              <h1>Copyright | Yaroslav Kidik</h1>
             </div>
         </div>
     </div>

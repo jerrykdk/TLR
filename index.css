@@ -1,3 +1,25 @@
 h1 {
-  color:  blue;
+  color:  brown;
+}
+
+
+#ans {
+  font-size: 64 px;
+}
+
+#hello {
+  font-size: 128 px;
+}
+
+
+.clock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  color: rgb(22, 3, 3);
+  font-size: 60px;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 7px;
+
 }
